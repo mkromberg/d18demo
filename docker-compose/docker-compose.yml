@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  
+  engine:
+    image: dyalog/jsonserver:dbg
+    volumes:
+    - "../perfected/:/app/"
+    ports:
+    - "4503:4502"
+     
+  website:  
+    image: dyalog/miserver:dbg
+    volumes:
+    - "../website/:/app/"
+    ports:
+    - "8080:8080"
+    - "4502:4502"

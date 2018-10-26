@@ -1,6 +1,7 @@
 ﻿⍝ d18demo mapped to /app
 )sh ls /app
 
+]load [dyalog]/Library/Conga/HttpCommand
 ]link # /app/noodle 
 )ed Foo
 Foo ⍝ Trace me!

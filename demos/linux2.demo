@@ -1,11 +1,14 @@
 ﻿⍝ demo18 mapped to /app
 
 ]link # /app/perfected
+]load /app/Library/HttpCommand 
+
 ⍝ Enable WS Explorer - examine fns
 CountDigits '123,123,-345'
-⍪files←⊃⎕NGET '/app/demos/csvfiles.txt'
-Analyze 2⊃files  
+⍪files←⊃⎕NGET '/app/demos/csvfiles.txt' 1
+Analyze 2⊃files 
+ 
 ⍝ Now return to shell and start jsonserver
 
-]load /app/Library/HttpCommand 
-HttpCommand.GetJSON 'post' 'host.docker.internal:8080/Analyze' (⊃files)
+z←HttpCommand.GetJSON 'post' '172.27.119.242:8080/Analyze' (⊃files)
+z.Data

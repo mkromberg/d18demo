@@ -1,33 +1,40 @@
-﻿:Class DigitFrequency : MiPage
+﻿:Class index : MiPage
 
-    ∇ Compose;go;mat  
+    ∇ Compose;go;mat
     ⍝ Create initial page content
-      :Access Public  
-
-      Add _.StyleSheet 'https://www.w3.org/StyleSheets/Core/Chocolate'
-      Add _.title 'Digit Frequency'
-      Add _.h1 'Digit Frequency'
+      :Access Public
      
-      '#file' Add _.Input '' ⍬ 'Filename: '
+      Add _.StyleSheet'https://www.w3.org/StyleSheets/Core/Chocolate'
+      Add _.title'Digit Frequency'
+      Add _.h1'Digit Frequency'
+     
+      '#file'Add _.Input''⍬'Filename: '
       go←Add _.Button'Go'
      
       go.On'click' 'OnGo'('input' 'val' '#file')
      
       mat←'Digit' 'Count'⍪(⍪⎕D),0
-      '#freqtable' Add _.Table mat ⍬ 1
+      '#freqtable'Add _.Table mat ⍬ 1
       '#chart' 'style="width:50%"'Add _.div
     ∇
 
     ∇ r←OnGo;mat;svg;data;file;z
       :Access Public
      
-      file←Get'input'
-      z←HttpCommand.GetJSON 'post' 'host.docker.internal:8080/Analyze' file
-      ∘∘∘
-      mat←'Digit' 'Count'⍪⎕D,⍪data
-      r←'#freqtable'Replace New _.Table mat ⍬ 1
-      svg←Chart data
-      r,←'#chart' Replace svg
+      
+      :Trap 0
+         file←Get'input'
+         ⎕SE.SALT.Load '/app/HttpCommand -target=#'
+         z←#.HttpCommand.GetJSON'post' '172.27.119.242:8080/Analyze'file
+         data←z.Data
+         mat←'Digit' 'Count'⍪⎕D,⍪data
+         r←'#freqtable'Replace New _.Table mat ⍬ 1
+         svg←Chart data
+         r,←'#chart'Replace svg
+      :Else
+         r←'#freqtable'Replace 'ERROR'
+         r,←'#chart'Replace '<pre>',(,⍕⎕DM,¨⊂'<br>'),'</pre>'
+      :EndTrap
     ∇
 
     ∇ svg←Chart data;sp
@@ -43,7 +50,7 @@
           ⎕USING←',system.dll' ',system.drawing.dll' ',sharpplot.dll' ⍝ Try to get .NET version of Causeway
       :AndIf 0=⎕NC'Causeway'                                          ⍝ Else use the APL version
           (System.Drawing←System←Causeway←⎕NS ⍬).⎕CY'/opt/mdyalog/17.1/64/unicode/ws/sharpplot.dws'
-      :EndIf          
+      :EndIf
     ∇
 
 :EndClass

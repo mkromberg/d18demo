@@ -1,6 +1,6 @@
 ﻿# Get started 
 git clone https://github.com/mkromberg/d18demo
-git clone https://github.com/mkromberg/docker-dyalog 
+git clone https://github.com/mkromberg/dyalog-docker
 sudo cp docker-dyalog/Scripts/* /usr/bin
 dyalog-c d18demo
 # ]demo /app/demos/linux1
@@ -13,11 +13,11 @@ dyalog-c d18demo
 # ]demo /app/demos/linux2
 
 jsonserver-c d18demo/code/cleaned 8080 4503
-curl (something)
+curl -w "\n" --header "content-type: application/json" --data '"23,234,-2345"' http://127.0.0.1:8080/CountDigits
 
 [back to dyalog-c]
 ]load /app/Library/HttpCommand 
-HttpCommand.GetJSON 'post' 'host.docker.internal:8080/Analyze' ⊃files
+HttpCommand.GetJSON 'post' '172.27.119.242:8080/Analyze' ⊃files
 )off
 
 ⍝ look at the webserver page
