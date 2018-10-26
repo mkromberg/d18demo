@@ -1,4 +1,4 @@
-﻿ r←CountDigits csv;txt
+﻿ r←CountDigits csv;txt;fields
 ⍝ frequency count of digits 0-9 in csv text
 
  txt←csv~'-'
