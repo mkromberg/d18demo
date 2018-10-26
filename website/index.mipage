@@ -9,7 +9,8 @@
       Add _.h1'Digit Frequency'
      
       '#file'Add _.Input''⍬'Filename: '
-      go←Add _.Button'Go'
+      Add '<br/><br/>'
+      go←Add _.Button'Run Analysis'
      
       go.On'click' 'OnGo'('input' 'val' '#file')
      
@@ -21,10 +22,8 @@
     ∇ r←OnGo;mat;svg;data;file;z
       :Access Public
      
-      
       :Trap 0
          file←Get'input'
-         ⎕SE.SALT.Load '/app/HttpCommand -target=#'
          z←#.HttpCommand.GetJSON'post' '172.27.119.242:8080/Analyze'file
          data←z.Data
          mat←'Digit' 'Count'⍪⎕D,⍪data

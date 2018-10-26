@@ -20,8 +20,12 @@ curl -w "\n" --header "content-type: application/json" --data '"23,234,-2345"' h
 HttpCommand.GetJSON 'post' '172.27.119.242:8080/Analyze' ⊃files
 )off
 
-⍝ look at the webserver page
+⍝ look at the webserver page - then run it
 miserver-c d18demo/website 8081 4504
+
+⍝ Wow... so, how do I learn more?
+go to: tryapl.org
+jupyter-c
 
 
 
