@@ -1,6 +1,6 @@
 ﻿⍝ demo18 mapped to /app
 
-]link # /app/noodle
+]link # /app/perfected
 ⍝ Enable WS Explorer - examine fns
 CountDigits '123,123,-345'
 ⍪files←⊃⎕NGET '/app/demos/csvfiles.txt'

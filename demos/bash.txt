@@ -21,7 +21,7 @@ HttpCommand.GetJSON 'post' 'host.docker.internal:8080/Analyze' ⊃files
 )off
 
 ⍝ look at the webserver page
-miserver-c d18demo/web 8081 4504
+miserver-c d18demo/website 8081 4504
 
 
 
