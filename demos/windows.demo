@@ -1,0 +1,43 @@
+﻿⍝ Working with Mary - first part: on Windows
+
+]load [dyalog]/Library/Conga/HttpCommand
+csv1←'http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv'
+csv2←'http://samplecsvs.s3.amazonaws.com/Sacramentorealestatetransactions.csv'
+
+⎕←z←HttpCommand.Get csv1
+296↑z.Data
+txt←z.Data~'-' ⍝ eliminate minus signs
+2 9⍴fields←(~txt∊',',⎕UCS 13 10)⊆txt
+⍉2 9⍴fields
+
+20↑fields←(~0∊¨fields∊¨⊂⎕D,'-.')/fields 
+≢chars←(∊1↓¨fields)~'.-' ⍝ drop 1st digit of each number
+{≢⍵}⌸ ⎕D,chars
+⎕D,⍪¯1+{≢⍵}⌸ ⎕D,chars     
+
+]cd C:\Users\mkrom\Dropbox\d18demo                                        
+]load noodle\Foo
+⍝ that's cool - how do I run it under Linux?
+
+⍝ Create & clone a GitHub repository
+]open https://github.com/mkromberg
+⍝ clone
+
+]save Foo c:\devt\d18demo\code -mkdir
+]save CountDigits c:\devt\d18demo\app
+⎕MKDIR 'c:\devt\d18demo\data'
+(⊂csv1 csv2) ⎕NPUT 'c:\devt\d18demo\data\files.txt'
+
+]open c:\devt\d18demo\app
+⍝ Git Commit
+
+
+
+
+
+
+
+
+
+
+

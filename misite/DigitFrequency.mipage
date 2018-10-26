@@ -1,0 +1,49 @@
+﻿:Class DigitFrequency : MiPage
+
+    ∇ Compose;go;mat  
+    ⍝ Create initial page content
+      :Access Public  
+
+      Add _.StyleSheet 'https://www.w3.org/StyleSheets/Core/Chocolate'
+      Add _.title 'Digit Frequency'
+      Add _.h1 'Digit Frequency'
+     
+      '#file' Add _.Input '' ⍬ 'Filename: '
+      go←Add _.Button'Go'
+     
+      go.On'click' 'OnGo'('input' 'val' '#file')
+     
+      mat←'Digit' 'Count'⍪(⍪⎕D),0
+      '#freqtable' Add _.Table mat ⍬ 1
+      '#chart' 'style="width:50%"'Add _.div
+    ∇
+
+    ∇ r←OnGo;mat;svg;data;file;z
+      :Access Public
+     
+      file←Get'input'
+      z←HttpCommand.GetJSON 'post' 'host.docker.internal:8080/Analyze' file
+      ∘∘∘
+      mat←'Digit' 'Count'⍪⎕D,⍪data
+      r←'#freqtable'Replace New _.Table mat ⍬ 1
+      svg←Chart data
+      r,←'#chart' Replace svg
+    ∇
+
+    ∇ svg←Chart data;sp
+      InitCauseway
+      sp←⎕NEW Causeway.SharpPlot
+      sp.YAxisStyle←Causeway.YAxisStyles.ForceZero
+      sp.DrawBarChart data
+      svg←sp.RenderSvg Causeway.SvgMode.FixedAspect
+    ∇
+
+    ∇ InitCauseway
+      :If 0=⎕NC'Causeway'
+          ⎕USING←',system.dll' ',system.drawing.dll' ',sharpplot.dll' ⍝ Try to get .NET version of Causeway
+      :AndIf 0=⎕NC'Causeway'                                          ⍝ Else use the APL version
+          (System.Drawing←System←Causeway←⎕NS ⍬).⎕CY'/opt/mdyalog/17.1/64/unicode/ws/sharpplot.dws'
+      :EndIf          
+    ∇
+
+:EndClass

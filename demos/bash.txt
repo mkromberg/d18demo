@@ -1,0 +1,37 @@
+﻿# Get started 
+git clone https://github.com/mkromberg/d18demo
+git clone https://github.com/mkromberg/docker-dyalog 
+sudo cp docker-dyalog/Scripts/* /usr/bin
+dyalog-c d18demo
+# ]demo /app/demos/linux1
+
+# In a new shell
+setxkbmap dk,apl -option grp:win_switch
+code d18demo
+
+dyalog-c d18demo
+# ]demo /app/demos/linux2
+
+jsonserver-c d18demo/code/cleaned 8080 4503
+curl (something)
+
+[back to dyalog-c]
+]load /app/Library/HttpCommand 
+HttpCommand.GetJSON 'post' 'host.docker.internal:8080/Analyze' ⊃files
+)off
+
+⍝ look at the webserver page
+miserver-c d18demo/web 8081 4504
+
+
+
+
+
+
+
+
+
+
+
+
+
