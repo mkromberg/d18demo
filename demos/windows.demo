@@ -15,7 +15,7 @@ txt←z.Data~'-' ⍝ eliminate minus signs
 {≢⍵}⌸ ⎕D,chars
 ⎕D,⍪¯1+{≢⍵}⌸ ⎕D,chars     
 
-]cd C:\Users\mkrom\Dropbox\d18demo                                        
+]cd C:\Users\devt\d18demo                                        
 ]load noodle\Foo
 ⍝ that's cool - how do I run it under Linux?
 
@@ -23,13 +23,12 @@ txt←z.Data~'-' ⍝ eliminate minus signs
 ]open https://github.com/mkromberg
 ⍝ clone
 
-]save Foo c:\devt\d18demo\code -mkdir
-]save CountDigits c:\devt\d18demo\app
+]save Foo c:\devt\mary\noodle -mkdir
 ⎕MKDIR 'c:\devt\d18demo\data'
-(⊂csv1 csv2) ⎕NPUT 'c:\devt\d18demo\data\files.txt'
+(⊂csv1 csv2) ⎕NPUT 'c:\devt\mary\demos\csvfiles.txt'
 
-]open c:\devt\d18demo\app
-⍝ Git Commit
+]open c:\devt\mary\app
+⍝ git commit -am "first committo
 
 
 
