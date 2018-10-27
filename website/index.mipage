@@ -28,10 +28,8 @@
          file←Get'input'
          engine←2 ⎕NQ '.' 'GetEnvironment' 'ENGINE' ⍝ get engine address from environment
          engine,←(0=≢engine)/'172.27.119.242:8081'       ⍝ default to Mary's Linux machine
-         ⎕←engine
          z←#.HttpCommand.GetJSON'post' (engine,'/Analyze') file
-         ⎕←data←z.Data
-         mat←'Digit' 'Count'⍪⎕D,⍪data
+         mat←'' 'Count'⍪(⎕D,¨':'),⍪↓'CI11' ⎕FMT data←z.Data
          r←'#freqtable'Replace New _.Table mat ⍬ 1
          svg←Chart data
          r,←'#chart'Replace svg
