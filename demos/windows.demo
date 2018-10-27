@@ -1,22 +1,21 @@
 ﻿⍝ Working with Mary - first part: on Windows
 
-]load [dyalog]/Library/Conga/HttpCommand
-csv1←'http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv'
-csv2←'http://samplecsvs.s3.amazonaws.com/Sacramentorealestatetransactions.csv'
-
-⎕←z←HttpCommand.Get csv1
-296↑z.Data
-txt←z.Data~'-' ⍝ eliminate minus signs
-2 9⍴fields←(~txt∊',',⎕UCS 13 10)⊆txt
-⍉2 9⍴fields
-
-20↑fields←(~0∊¨fields∊¨⊂⎕D,'-.')/fields 
-≢chars←(∊1↓¨fields)~'.-' ⍝ drop 1st digit of each number
+⎕←fields←⎕CSV 'c:\devt\d18demo\demos\nsew.txt' 
+∊1⊃¨⎕VFI¨fields
+⎕←nums←{(∊1⊃¨⎕VFI¨⍵)/⍵} ,fields 
+≢chars←(∊1↓¨nums)~'.-' ⍝ drop 1st digit of each number
+{≢⍵}⌸ chars            ⍝ count of each unique member 
+⎕D,chars               ⍝ prefix with all digits
 {≢⍵}⌸ ⎕D,chars
 ⎕D,⍪¯1+{≢⍵}⌸ ⎕D,chars     
 
-]cd C:\Users\devt\d18demo                                        
-]load noodle\Foo
+]load [dyalog]/Library/Conga/HttpCommand
+url←'http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv'
+⎕←return←#.HttpCommand.Get url
+296↑⎕CSV return.Data
+ 
+]load C:\Devt\d18demo\noodle\Foo
+Foo ⍝ trace me
 ⍝ that's cool - how do I run it under Linux?
 
 ⍝ Create & clone a GitHub repository
@@ -25,6 +24,8 @@ txt←z.Data~'-' ⍝ eliminate minus signs
 
 ]save Foo c:\devt\mary\noodle -mkdir
 ⎕MKDIR 'c:\devt\d18demo\data'
+csv1←'http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv'
+csv2←'http://samplecsvs.s3.amazonaws.com/Sacramentorealestatetransactions.csv'
 (⊂csv1 csv2) ⎕NPUT 'c:\devt\mary\demos\csvfiles.txt'
 
 ]open c:\devt\mary\app

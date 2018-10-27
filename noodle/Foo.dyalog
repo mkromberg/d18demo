@@ -4,6 +4,6 @@
  url←'http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv'
  return←#.HttpCommand.Get url
  txt←return.Data~'-'
- fields←(~txt∊',',⎕UCS 13 10)⊆txt
- fields←(~0∊¨fields∊¨⊂⎕D,'.')/fields
+ fields←(~txt∊',',⎕UCS 13 10)⊆txt ⍝ split fields on , CR or LF
+ fields←(∊1⊃¨⎕VFI¨fields)/fields
  ⎕←⎕D,⍪¯1+{≢⍵}⌸⎕D,(∊1↓¨fields)~'.-' ⍝ drop 1st digit of each number

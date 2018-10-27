@@ -19,12 +19,15 @@
       '#chart' 'style="width:50%"'Add _.div
     ∇
 
-    ∇ r←OnGo;mat;svg;data;file;z
+    ∇ r←OnGo;mat;svg;data;file;z;engine
       :Access Public
      
-      :Trap 0
+      :Trap 999
+
          file←Get'input'
-         z←#.HttpCommand.GetJSON'post' '172.27.119.242:8080/Analyze'file
+         engine←2 ⎕NQ '.' 'GetEnvironment' 'ENGINE' ⍝ get engine address from environment
+         engine,←(0=≢engine)/'172.27.119.241'       ⍝ default to Mary's Linux machine
+         z←#.HttpCommand.GetJSON'post' (engine,':8081/Analyze') file
          data←z.Data
          mat←'Digit' 'Count'⍪⎕D,⍪data
          r←'#freqtable'Replace New _.Table mat ⍬ 1
@@ -32,7 +35,7 @@
          r,←'#chart'Replace svg
       :Else
          r←'#freqtable'Replace 'ERROR'
-         r,←'#chart'Replace '<pre>',(,⍕⎕DM,¨⊂'<br>'),'</pre>'
+         r,←'#chart'Replace '<pre>',(,⍕((⊂⍕z),⎕DM),¨⊂'<br>'),'</pre>'
       :EndTrap
     ∇
 
