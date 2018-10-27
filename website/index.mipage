@@ -23,10 +23,10 @@
       :Access Public
      
       :Trap 999
-
+         ...
          file←Get'input'
          engine←2 ⎕NQ '.' 'GetEnvironment' 'ENGINE' ⍝ get engine address from environment
-         engine,←(0=≢engine)/'172.27.119.241'       ⍝ default to Mary's Linux machine
+         engine,←(0=≢engine)/'172.27.119.242'       ⍝ default to Mary's Linux machine
          z←#.HttpCommand.GetJSON'post' (engine,':8081/Analyze') file
          data←z.Data
          mat←'Digit' 'Count'⍪⎕D,⍪data
