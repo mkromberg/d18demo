@@ -6,29 +6,31 @@
      
       Add _.StyleSheet'https://www.w3.org/StyleSheets/Core/Chocolate'
       Add _.title'Digit Frequency'
-      Add _.h1'Digit Frequency'
+      Add _.h1'Digit Frequency Analysis'
      
-      '#file'Add _.Input''⍬'Filename: '
+      '#file' 'style="width:600px;"' Add _.Input''⍬'Filename: '
       Add '<br/><br/>'
-      go←Add _.Button'Run Analysis'
-     
+      btnstyle←'style="padding:5px 25px; background-color:orange;"'
+      go←btnstyle Add _.Button 'Run Analysis'
       go.On'click' 'OnGo'('input' 'val' '#file')
-     
+      Add '<br/><br/>'
       mat←'Digit' 'Count'⍪(⍪⎕D),0
       '#freqtable'Add _.Table mat ⍬ 1
+
+      Add '<br/>'
       '#chart' 'style="width:50%"'Add _.div
     ∇
 
     ∇ r←OnGo;mat;svg;data;file;z;engine
       :Access Public
      
-      :Trap 999
-         ...
+      :Trap 0
          file←Get'input'
          engine←2 ⎕NQ '.' 'GetEnvironment' 'ENGINE' ⍝ get engine address from environment
-         engine,←(0=≢engine)/'172.27.119.242'       ⍝ default to Mary's Linux machine
-         z←#.HttpCommand.GetJSON'post' (engine,':8081/Analyze') file
-         data←z.Data
+         engine,←(0=≢engine)/'172.27.119.242:8081'       ⍝ default to Mary's Linux machine
+         ⎕←engine
+         z←#.HttpCommand.GetJSON'post' (engine,'/Analyze') file
+         ⎕←data←z.Data
          mat←'Digit' 'Count'⍪⎕D,⍪data
          r←'#freqtable'Replace New _.Table mat ⍬ 1
          svg←Chart data
