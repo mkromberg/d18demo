@@ -13,7 +13,13 @@ dyalog-c d18demo
 # ]demo /app/demos/linux2
 
 jsonserver-c d18demo/code/cleaned 8080 4503
-curl -w "\n" --header "content-type: application/json" --data '"23,234,-2345"' http://127.0.0.1:8080/CountDigits
+
+export srv='http://127.0.0.1:8080/'
+export opts='-w "\n" --header "content-type: application/json"'
+export csv1='"http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv"'
+
+curl $opts --data '"234,234,-2345"' $srv/CountDigits 
+curl $opts --data $csv1 $srv/Analyze
 
 [back to dyalog-c]
 ]load /app/Library/HttpCommand 
