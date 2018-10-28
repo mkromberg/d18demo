@@ -8,7 +8,8 @@
       Add _.title'Digit Frequency'
       Add _.h1'Digit Frequency Analysis'
      
-      '#file' 'style="width:600px;"' Add _.Input''⍬'Filename: '
+      file←'http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv'
+      '#file' 'style="width:600px;"' Add _.Input file ⍬'Filename: '
       Add '<br/><br/>'
       btnstyle←'style="padding:5px 25px; background-color:orange;"'
       go←btnstyle Add _.Button 'Run Analysis'
