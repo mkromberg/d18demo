@@ -1,5 +1,5 @@
-﻿ r←CountDigits csv;txt;fields
-⍝ frequency count of digits 0-9 in csv text
+ r←CountDigits csv;txt;fields
+⍝ Frequency count of digits 0-9 in csv text
 
  txt←csv~'-'                      ⍝ ignore minus signs
  fields←(~txt∊',',⎕UCS 13 10)⊆txt ⍝ split on , CR or LF
