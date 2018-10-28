@@ -1,35 +1,41 @@
 ﻿⍝ Working with Mary - first part: on Windows
 
 ⎕←fields←⎕CSV 'c:\devt\d18demo\demos\nsew.txt' 
+1⊃¨⎕VFI¨fields
 ∊1⊃¨⎕VFI¨fields
 ⎕←nums←{(∊1⊃¨⎕VFI¨⍵)/⍵} ,fields 
-≢chars←(∊1↓¨nums)~'.-' ⍝ drop 1st digit of each number
-{≢⍵}⌸ chars            ⍝ count of each unique member 
-⎕D,chars               ⍝ prefix with all digits
-{≢⍵}⌸ ⎕D,chars
-⎕D,⍪¯1+{≢⍵}⌸ ⎕D,chars     
+⎕←chars←(∊1↓¨nums)~'.-'  ⍝ drop 1st digit of each number
+{≢⍵}⌸ chars              ⍝ count of each unique member 
+⎕D,chars                 ⍝ prefix with all digits
+{≢⍵}⌸ ⎕D,chars           ⍝ results now in ⎕D order - but 1 too high
+↑ ⎕D (¯1+{≢⍵}⌸ ⎕D,chars)    
 
 ]load [dyalog]/Library/Conga/HttpCommand
 url←'http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv'
 ⎕←return←#.HttpCommand.Get url
-296↑⎕CSV return.Data
+296↑return.Data
  
 ]load C:\Devt\d18demo\noodle\Foo
 Foo ⍝ trace me
-⍝ that's cool - how do I run it under Linux?
 
-⍝ Create & clone a GitHub repository
+⍝ Let's create a GitHub repository
 ]open https://github.com/mkromberg
-⍝ clone
 
-]save Foo c:\devt\mary\noodle -mkdir
-⎕MKDIR 'c:\devt\d18demo\data'
+3 ⎕NDELETE 'c:\devt\d18mary'
+]cd c:\devt
+⎕CMD 'git clone http://github.com/mkromberg/d18mary'
+
+]save Foo c:\devt\d18mary\noodle\Foo -makedir
+⎕MKDIR'c:\devt\d18mary\demos'
 csv1←'http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv'
 csv2←'http://samplecsvs.s3.amazonaws.com/Sacramentorealestatetransactions.csv'
-(⊂csv1 csv2) ⎕NPUT 'c:\devt\mary\demos\csvfiles.txt'
+(⊂csv1 csv2) ⎕NPUT 'c:\devt\d18mary\demos\csvfiles.txt'
 
-]open c:\devt\mary\app
-⍝ git commit -am "first committo
+]open c:\devt\d18mary
+⍝ git add .
+⍝ git commit -m "first commit"
+⍝ git push
+
 
 
 

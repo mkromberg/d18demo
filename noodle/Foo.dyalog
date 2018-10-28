@@ -5,5 +5,5 @@
  return←#.HttpCommand.Get url
  txt←return.Data~'-'
  fields←(~txt∊',',⎕UCS 13 10)⊆txt ⍝ split fields on , CR or LF
- fields←(∊1⊃¨⎕VFI¨fields)/fields
- ⎕←⎕D,⍪¯1+{≢⍵}⌸⎕D,(∊1↓¨fields)~'.-' ⍝ drop 1st digit of each number
+ fields←(∧/¨1⊃¨⎕VFI¨fields)/fields
+ ⎕←⎕D,⍪¯1+{≢⍵}⌸⎕D,(∊1↓¨fields)∩⎕D ⍝ drop 1st digit of each number
