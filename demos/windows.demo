@@ -1,5 +1,6 @@
 ﻿⍝ Working with Mary - first part: on Windows
 
+]open c:\devt\d18demo\demos\nsew.txt
 ⎕←fields←⎕CSV 'c:\devt\d18demo\demos\nsew.txt' 
 1⊃¨⎕VFI¨fields
 ∊1⊃¨⎕VFI¨fields
@@ -20,10 +21,6 @@ Foo ⍝ trace me
 
 ⍝ Let's create a GitHub repository
 ]open https://github.com/mkromberg
-
-3 ⎕NDELETE 'c:\devt\d18mary'
-]cd c:\devt
-⎕CMD 'git clone http://github.com/mkromberg/d18mary'
 
 ]save Foo c:\devt\d18mary\noodle\Foo -makedir
 ⎕MKDIR'c:\devt\d18mary\demos'
