@@ -1,10 +1,5 @@
 #!/bin/bash
-
-export srv='http://127.0.0.1:8080/'
-export opts='-w "\n" --header "content-type: application/json"'
-export csv1='"http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv"'
-
-echo 'CountDigits "234,234,-2345"'
-curl $opts --data '"234,234,-2345"' $srv/CountDigits 
-echo 'Analyze "$csv1"'
-curl $opts --data $csv1 $srv/Analyze
+export url='http://127.0.0.1:8080/Analyze'
+export header='content-type: application/json'
+export data='"http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv"'
+curl -w "\n" --header "$header " --data "$data" $url
