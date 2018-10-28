@@ -1,5 +1,5 @@
 #!/bin/bash
-export url='http://127.0.0.1:8080/Analyze'
+export url='http://127.0.0.1:8081/Analyze'
 export header='content-type: application/json'
 export data='"http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv"'
 curl -w "\n" --header "$header " --data "$data" $url
