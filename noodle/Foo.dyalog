@@ -1,5 +1,5 @@
-﻿ Foo;return;txt;fields;url
-⍝ frequency count of digits 0-9 in csv text
+ Foo;return;txt;fields;url
+⍝ Frequency count of digits 0-9 in csv text
 
  url←'http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv'
  return←#.HttpCommand.Get url
